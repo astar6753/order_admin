@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: white;
+
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(51, 89, 186);
+    padding: 8px 12px;
+}
+.logo {
+    font-size: 24px;
+    color: white;
+}
+.menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+
+}
+.menu li {
+    padding:  8px 12px;
+}
+.sep {
+    color: white;
+}
