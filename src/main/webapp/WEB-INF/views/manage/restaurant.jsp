@@ -21,6 +21,7 @@
                         <div class="img_area"></div>
                         <tr>
                             <td>번호</td>
+                            <td>분류</td>
                             <td>상호명</td>
                             <td>최소주문가격</td>
                             <td>배달료</td>
@@ -40,10 +41,15 @@
             <div class="restaurant_add">
                 <h1 class="popup_title"></h1>
                 <div class="content">
-                    <p><input type="text" id="ri_name">상호명</p>
-                    <p><input type="text" id="ri_min_price">최소주문가격</p>
-                    <p><input type="text" id="ri_delivery_fee">배달료</p>
-                    <p><input type="text" id="ri_address">위치</p>
+                    <p>분류</p>
+                        <div class="search_area">
+                            <input type="text" id="cate_name">
+                            <select id="cate_list"></select>
+                        </div>
+                    <p>상호명</p><input type="text" id="ri_name">
+                    <p>최소주문가격</p><input type="text" id="ri_min_price">
+                    <p>배달료</p><input type="text" id="ri_delivery_fee">
+                    <p>위치</p><input type="text" id="ri_address">
                 </div>
                 <div class="btn">
                     <button id="add_btn" data-seq="${user.mi_seq}">등록</button>

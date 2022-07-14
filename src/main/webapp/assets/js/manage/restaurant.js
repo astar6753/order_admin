@@ -5,6 +5,27 @@ $(function(){
     })
     $("#cancel").click(function(){  
         set_popup();
+        
+    })
+    $("#cate_name").change(function(){
+        $("#cate_list").html("");
+        let keyword = $("#cate_name").val();
+        $.ajax({
+            url:"/api/restaurant/category?keyword="+keyword,
+            type:"get",
+            success:function(r) {
+                if(r.cate_search.length==0)return;
+                for (let i = 0; i < r.cate_search.length; i++) {
+                    let tag = "<option id='select_cate"+i+"' value="+r.cate_search[i].cate_seq+">"+r.cate_search[i].cate_name+"</option>";
+                    $("#cate_list").append(tag);
+                }
+
+                $("").change(function(){
+                    $("#cate_list option:selected").val();
+                    $("#cate_list option:selected").html();
+                })
+            }
+        })
     })
     $.ajax({
         url:"/api/restaurant/user/list",

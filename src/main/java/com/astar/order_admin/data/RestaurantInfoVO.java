@@ -11,4 +11,5 @@ public class RestaurantInfoVO {
     private Integer ri_delivery_fee;
     private Integer ri_img_seq;
     private String ri_address;
+    private Integer ri_cate_seq;
 }

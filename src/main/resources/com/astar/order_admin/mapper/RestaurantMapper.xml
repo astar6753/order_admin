@@ -4,9 +4,9 @@
 
     <insert id="insertRestaurantInfo">
         INSERT INTO restaurant_info
-        (ri_mi_seq, ri_name, ri_min_price, ri_delivery_fee, ri_address)
+        (ri_mi_seq, ri_name, ri_min_price, ri_delivery_fee, ri_address, ri_cate_seq)
         VALUES
-        (#{ri_mi_seq}, #{ri_name}, #{ri_min_price}, #{ri_delivery_fee}, #{ri_address})
+        (#{ri_mi_seq}, #{ri_name}, #{ri_min_price}, #{ri_delivery_fee}, #{ri_address}, #{ri_cate_seq})
     </insert>
 
     <select id="selectRestaurantInfoBySeq" resultType="com.astar.order_admin.data.RestaurantInfoVO">

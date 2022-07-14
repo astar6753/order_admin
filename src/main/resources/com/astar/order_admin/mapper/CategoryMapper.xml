@@ -1,0 +1,23 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.astar.order_admin.mapper.CategoryMapper">
+    <select id="getCategoryInfoByName" resultType="com.astar.order_admin.data.CategoryInfoVO">
+        SELECT cate_seq, cate_name
+        FROM category_info
+        WHERE cate_name like #{keyword}
+        LIMIT 10
+    </select>
+    <select id="getCategoryInfoList" resultType="com.astar.order_admin.data.CategoryInfoVO">
+        SELECT cate_seq, cate_name
+        FROM category_info
+        LIMIT 10 OFFSET #{offset}
+    </select>    
+    <select id="getCategoryInfoTotalCnt" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM category_info
+    </select>    
+    <select id="getCategoryInfoPageCnt" resultType="java.lang.Integer">
+        SELECT ceil(count(*)/10)
+        FROM category_info
+    </select>
+</mapper>

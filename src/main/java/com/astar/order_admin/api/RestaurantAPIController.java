@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.astar.order_admin.data.MemberInfoVO;
 import com.astar.order_admin.data.RestaurantInfoVO;
 import com.astar.order_admin.mapper.RestaurantMapper;
+import com.astar.order_admin.service.CategoryService;
 import com.astar.order_admin.service.MemberService;
 
 @RestController
@@ -29,6 +30,7 @@ import com.astar.order_admin.service.MemberService;
 public class RestaurantAPIController {
     @Autowired RestaurantMapper rest_mapper;
     @Autowired MemberService member_service;
+    @Autowired CategoryService cate_service;
     //사업자회원의 영업장 추가
     //chk//유저로그인/사업자회원/세션유저eq=영업장주인seq/상호명중복검사
     @PutMapping("/insert")
@@ -64,7 +66,7 @@ public class RestaurantAPIController {
     @GetMapping("/user/list") 
     public ResponseEntity<Map<String,Object>> getUserRestaurant(
         @RequestParam @Nullable Integer page, HttpSession session
-    ) {
+        ) {
         Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
         MemberInfoVO user = (MemberInfoVO)session.getAttribute("user");
         
@@ -85,7 +87,7 @@ public class RestaurantAPIController {
     @DeleteMapping("/delete") 
     public ResponseEntity<Map<String,Object>> deleteUserRestaurant(
         @RequestParam Integer seq, HttpSession session
-    ) {
+        ) {
         Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
         MemberInfoVO user = (MemberInfoVO)session.getAttribute("user");
 
@@ -105,7 +107,7 @@ public class RestaurantAPIController {
     @PatchMapping("/update") 
     public ResponseEntity<Map<String,Object>> updateUserRestaurant(
         @RequestBody RestaurantInfoVO data, HttpSession session
-    ) {
+        ) {
         Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
         MemberInfoVO user = (MemberInfoVO)session.getAttribute("user");
         data.setRi_mi_seq(user.getMi_seq());    //현재 세션의 유저seq를 세팅
@@ -127,17 +129,31 @@ public class RestaurantAPIController {
         return new ResponseEntity<Map<String,Object>>(resultMap,HttpStatus.OK);
     }
 
+    //카테고리 검색결과 근사치 3개
+    @GetMapping("/category")
+    public ResponseEntity<Map<String,Object>> getCategorySearchList(
+        @RequestParam String keyword
+        ){
+        return new ResponseEntity<Map<String,Object>>(
+            cate_service.searchCategoryByName(keyword),HttpStatus.OK);
+    }
+
+    //카테고리 목록
+    @GetMapping("/category/list")
+    public ResponseEntity<Map<String,Object>> getCategoryList(
+        @RequestParam @Nullable Integer page
+        ){            
+        return new ResponseEntity<Map<String,Object>>(cate_service.selectCategoryList(page),HttpStatus.OK);
+    }
 
 
 
     
     @GetMapping("/list")        //식당 {검색어} 전체조회 10개씩 1페이지로
     public ResponseEntity<Map<String,Object>> postRestautantInfo(
-        @RequestBody MemberInfoVO data,
-        @RequestParam @Nullable String keyword,
-        @RequestParam Integer page,
-        HttpSession session
-    ) {
+        @RequestBody MemberInfoVO data,@RequestParam @Nullable String keyword,
+        @RequestParam Integer page,HttpSession session
+        ) {
         Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
         
         //세션체크 서비스단으로
