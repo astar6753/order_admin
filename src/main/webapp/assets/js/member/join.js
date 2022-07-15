@@ -8,7 +8,7 @@ $(function(){
         dup_check = false;
     })
 
-    $("#mi_pwd_confirm").keyup(function(){
+    $("mi_pwd, #mi_pwd_confirm").keyup(function(){
         if($("#mi_pwd").val() != $("#mi_pwd_confirm").val()) {
             $("#pwd_not_confirm").html("비밀번호가 일치하지 않습니다.")
             return;
@@ -72,7 +72,7 @@ $(function(){
             "mi_phone" : $("#mi_phone").val(),
             "mi_address" : $("#mi_address").val()
         }
-        console.log(data);
+        
         $.ajax({
             url:"/api/member/join",
             type:"put",

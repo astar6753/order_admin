@@ -13,4 +13,6 @@ public class MemberInfoVO {
     private Integer mi_status;
     private Integer mi_grade;
     private String mi_address;
+    //회원정보 수정시 필요한 기존비밀번호
+    private String origin_pwd;
 }

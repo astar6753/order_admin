@@ -27,7 +27,7 @@ $(function(){
             },
             error:function(err){
                 alert(err.responseJSON.message);
-                location.href="/member/login"
+                $("#user_pwd").val("");
             }
             
         })

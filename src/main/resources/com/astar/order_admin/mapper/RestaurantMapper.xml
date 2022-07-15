@@ -9,8 +9,8 @@
         (#{ri_mi_seq}, #{ri_name}, #{ri_min_price}, #{ri_delivery_fee}, #{ri_address}, #{ri_cate_seq})
     </insert>
 
-    <select id="selectRestaurantInfoBySeq" resultType="com.astar.order_admin.data.RestaurantInfoVO">
-        SELECT * FROM restaurant_info
+    <select id="selectRestaurantCateViewBySeq" resultType="com.astar.order_admin.data.RestaurantCateViewVO">
+        SELECT * FROM restaurant_cate_view
         WHERE ri_mi_seq = #{seq}
         LIMIT 10 OFFSET #{offset}
     </select>
@@ -24,7 +24,8 @@
             ri_name=#{ri_name},
             ri_min_price=#{ri_min_price},
             ri_delivery_fee=#{ri_delivery_fee},
-            ri_address=#{ri_address}
+            ri_address=#{ri_address},
+            ri_cate_seq=#{ri_cate_seq}
         WHERE ri_seq= #{ri_seq} AND ri_mi_seq = #{ri_mi_seq}
     </update>
 

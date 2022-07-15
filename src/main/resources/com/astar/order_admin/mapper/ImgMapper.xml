@@ -1,0 +1,27 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.astar.order_admin.mapper.ImgMapper">
+    <select id="selectImgInfoBySeq" resultType="com.astar.order_admin.data.ImgInfoVO">
+        SELECT * FROM img_info
+        WHERE img_mi_seq = #{seq} AND img_type = #{type}
+        LIMIT 10 OFFSET #{offset}
+    </select>
+
+
+
+
+
+
+    
+    <insert id="insertImgInfo">
+        INSERT INTO img_info
+        (img_mi_seq, img_type, img_front_name, img_back_name)
+        VALUES
+        (#{img_mi_seq}, #{img_type}, #{img_front_name}, #{img_back_name})
+    </insert>
+    <update id="insertImgToRestaurantInfo">
+        UPDATE INTO restaurant_info 
+        SET ri_img_seq = #{img_seq}
+        WHERE ri_seq = #{ri_seq}
+    </update>
+</mapper>

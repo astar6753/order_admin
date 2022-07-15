@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/manage")
 public class ManageController {
     
-    @GetMapping("/customer")  //고객 조회(주문한 고객에 대한 정보)
+    @GetMapping("/customer")  //고객 주문 이력 조회
     public String getManageCustomer() {
         return "/manage/customer";
     }
     @GetMapping("/restaurant")  //영업장 관리
     public String getManageRestaurant() {
-        
         return "/manage/restaurant";
     }
-    @GetMapping("/order")  //주문조회
+    @GetMapping("/order")  //주문 관리
     public String getManageOrder() {
         return "/member/order";
     }

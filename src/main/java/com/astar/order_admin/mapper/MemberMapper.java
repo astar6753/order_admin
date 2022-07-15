@@ -10,5 +10,6 @@ public interface MemberMapper {
     public void insertMemberInfo(MemberInfoVO data);
     public MemberInfoVO selectMemberLogin(MemberInfoVO data);
     public boolean isDuplicatedId(String id);
-    public MemberInfoVO selectJoinMember(Integer seq);
+    public MemberInfoVO selectMemberInfoBySeq(Integer seq);
+    public void updateMemberInfo(MemberInfoVO data);
 }

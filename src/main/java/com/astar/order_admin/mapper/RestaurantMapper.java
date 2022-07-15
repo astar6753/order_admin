@@ -11,7 +11,7 @@ public interface RestaurantMapper {
 
     public void insertRestaurantInfo(RestaurantInfoVO data);
 
-    public List<RestaurantInfoVO> selectRestaurantInfoBySeq(Integer seq, Integer offset);
+    public List<RestaurantInfoVO> selectRestaurantCateViewBySeq(Integer seq, Integer offset);
     public void deleteRestaurantInfoBySeq(Integer ri_seq, Integer ri_mi_seq);
     public void updateRestaurantInfo(RestaurantInfoVO data);
 

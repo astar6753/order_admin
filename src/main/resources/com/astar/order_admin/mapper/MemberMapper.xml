@@ -17,9 +17,18 @@
     <select id="isDuplicatedId" resultType="java.lang.Boolean">
         SELECT COUNT(*) FROM member_info WHERE mi_id = #{id}
     </select>
-    <select id="selectJoinMember" resultType="com.astar.order_admin.data.MemberInfoVO">
-        SELECT mi_seq, mi_id, mi_name, mi_phone, mi_img_seq, mi_status, mi_grade
+    <select id="selectMemberInfoBySeq" resultType="com.astar.order_admin.data.MemberInfoVO">
+        SELECT mi_seq, mi_id, mi_name, mi_phone, mi_img_seq, mi_status, mi_grade, mi_address
         FROM member_info
         WHERE mi_seq = #{mi_seq}
     </select>
+    <update id="updateMemberInfo" >
+        UPDATE member_info
+        SET 
+            mi_pwd=#{mi_pwd},
+            mi_name=#{mi_name},
+            mi_phone=#{mi_phone},
+            mi_address=#{mi_address}
+        WHERE mi_seq= #{mi_seq} and mi_pwd = #{origin_pwd}
+    </update>
 </mapper>

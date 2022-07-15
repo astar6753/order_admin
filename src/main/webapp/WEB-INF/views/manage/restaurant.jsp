@@ -1,5 +1,6 @@
 <%@page language ="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/includes/header.jsp"%>
+<%@include file="/WEB-INF/includes/imgbox.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +36,8 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pager_area">
+            </div>
         </section>
 
         <section class="popup_area">
@@ -42,9 +45,11 @@
                 <h1 class="popup_title"></h1>
                 <div class="content">
                     <p>분류</p>
+                        <input type="text" id="cate_name" placeholder="카테고리 검색">
                         <div class="search_area">
-                            <input type="text" id="cate_name">
-                            <select id="cate_list"></select>
+                            <select id="cate_list" onchange="changeSelect()">
+                                <option value='' selected disabled>카테고리 선택</option>
+                            </select>                            
                         </div>
                     <p>상호명</p><input type="text" id="ri_name">
                     <p>최소주문가격</p><input type="text" id="ri_min_price">

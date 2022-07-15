@@ -11,7 +11,7 @@
 <body>
     <main>
         <section class="manage_customer">
-            <h1>고객 주문 이력 조회</h1>
+            <h1>주문 이력</h1>
         </section>
 
     </main>

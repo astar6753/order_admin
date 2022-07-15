@@ -9,6 +9,7 @@ $(function(){
     })
     $("#cate_name").change(function(){
         $("#cate_list").html("");
+        $("#cate_name").attr("cate-seq","")
         let keyword = $("#cate_name").val();
         $.ajax({
             url:"/api/restaurant/category?keyword="+keyword,
@@ -19,11 +20,7 @@ $(function(){
                     let tag = "<option id='select_cate"+i+"' value="+r.cate_search[i].cate_seq+">"+r.cate_search[i].cate_name+"</option>";
                     $("#cate_list").append(tag);
                 }
-
-                $("").change(function(){
-                    $("#cate_list option:selected").val();
-                    $("#cate_list option:selected").html();
-                })
+                changeSelect();
             }
         })
     })
@@ -32,15 +29,17 @@ $(function(){
         type:"get",
         success:function(r) {
             console.log(r.message);
-            for (let i = 1; i < r.list.length; i++) {
+
+            for (let i = 0; i < r.list.length; i++) {
                 let tag =   "<tr>"+
                                 "<td id='order"+r.list[i].ri_seq+"'>"+i+"</td>"+
+                                "<td id='cate"+r.list[i].ri_seq+"'>"+r.list[i].cate_name+"</td=>"+
                                 "<td id='name"+r.list[i].ri_seq+"'>"+r.list[i].ri_name+"</td=>"+
                                 "<td id='price"+r.list[i].ri_seq+"'>"+r.list[i].ri_min_price+"</td=>"+
                                 "<td id='fee"+r.list[i].ri_seq+"'>"+r.list[i].ri_delivery_fee+"</td=>"+
                                 "<td id='addr"+r.list[i].ri_seq+"'>"+r.list[i].ri_address+"</td=>"+
-                                "<td id='img"+r.list[i].ri_seq+"'>"+"img일단은 넘어가"+"</td=>"+
-                                "<td><button class='edit_btn' data-seq="+r.list[i].ri_seq+"><i class='fas fa-edit'></i><span>수정</span></button></td>"+
+                                "<td><button class='img_btn' data-seq="+r.list[i].ri_seq+"><i class='fas fa-edit'></i><span>이미지 편집</span></button></td>"+
+                                "<td><button class='edit_btn' data-seq="+r.list[i].ri_seq+" cate-seq="+r.list[i].ri_cate_seq+"><i class='fas fa-edit'></i><span>수정</span></button></td>"+
                                 "<td><button class='del_btn' data-seq="+r.list[i].ri_seq+"><i class='fas fa-trash-alt'></i><span>삭제</span></button></td>"+
                             "</tr>";
                 $("#restaurant_list").append(tag);
@@ -64,6 +63,8 @@ $(function(){
             $(".edit_btn").click(function(){
                 set_popup("edit");
                 let seq = $(this).attr("data-seq"); //버튼 생성시 세팅된 영업장seq
+                $("#cate_name").val($("#cate"+seq+"").html());
+                let cate_seq = $("#cate_name").attr("cate-seq",$(this).attr("cate-seq"));
                 $("#ri_name").val($("#name"+seq+"").html());
                 $("#ri_min_price").val($("#price"+seq+"").html());
                 $("#ri_delivery_fee").val($("#fee"+seq+"").html());
@@ -73,11 +74,13 @@ $(function(){
                     if(valid_chk())return;
                     let data = {
                         ri_seq: seq,
+                        ri_cate_seq: cate_seq,
                         ri_name: $("#ri_name").val(),
                         ri_min_price: $("#ri_min_price").val(),
                         ri_delivery_fee: $("#ri_delivery_fee").val(),
                         ri_address: $("#ri_address").val()
                     };
+                    console.log(data)
                     $.ajax({
                         url:"/api/restaurant/update",
                         type:"patch",
@@ -105,12 +108,12 @@ $(function(){
         if(valid_chk())return;
         let data = {
             ri_mi_seq:$(this).attr("data-seq"), //jsp에서 세션의 유저seq를 버튼에 등록해둠
+            ri_cate_seq: $("#cate_list option:selected").val(),
             ri_name: $("#ri_name").val(),
             ri_min_price: $("#ri_min_price").val(),
             ri_delivery_fee: $("#ri_delivery_fee").val(),
             ri_address: $("#ri_address").val()
         }
-        console.log(data);
         $.ajax({
             url:"/api/restaurant/insert",
             type:"put",
@@ -130,9 +133,16 @@ $(function(){
 
 function set_popup(mode){
     $(".popup_area").hide();
+    $("#cate_name").attr("cate-seq","");
+    $("#cate_list").html("")    
+    let tag = "<option value='' selected disabled>카테고리 선택</option>"
+    $("#cate_list").append(tag)
+    $("#cate_list option:eq(0)").html("카테고리 검색")
+    $("#cate_name").val("")
     $("#ri_name").val("")
     $("#ri_min_price").val("")
     $("#ri_delivery_fee").val("")
+    $("#ri_address").val("")
     if(mode=="add"){
         $(".popup_title").html("영업장 등록")
         $("#mod_btn").hide();
@@ -147,6 +157,10 @@ function set_popup(mode){
     }
 }
 function valid_chk(){    
+    if(isEmpty($("#cate_list option:selected").val(),false)) {
+        alert("카테고리 이름을 입력하세요");
+        return false;
+    }
     if(isEmpty($("#ri_name").val(),false)) {
         alert("영업장 이름을 입력하세요");
         return false;
@@ -163,4 +177,9 @@ function valid_chk(){
         alert("배달료를 입력하세요");
         return false;
     }
+}
+
+function changeSelect(){
+    $("#cate_name").val($("#cate_list option:selected").text());
+    $("#cate_name").attr("cate-seq",$("#cate_list option:selected").val());
 }

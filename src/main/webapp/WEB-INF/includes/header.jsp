@@ -31,11 +31,11 @@
         </div>
 
         <div class="menu">
-            <a class="customer_list" href="/manage/customer">고객 주문 이력 조회</a>
+            <a class="customer_list" href="/manage/customer">고객 이력 조회</a>
             <p class="sep">|</p>
             <a class="restaurant_list" href="/manage/restaurant">영업장 관리</a>
             <p class="sep">|</p>
-            <a class="order_list" href="/manage/order">주문 정보 조회</a>
+            <a class="order_list" href="/manage/order">주문 관리</a>
         </div>
 
         <div class="user_info">
