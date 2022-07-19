@@ -46,7 +46,6 @@ public class FileAPIController {
         } catch (Exception e) {
             System.out.println("파일을 찾을 수 없거나 잘못된 파일 경로 입니다.");
         }
-
         //파일의 실제 경로에 찾아가서 파일의 유형을 가져온다.
         String contentType = null;
         try {
@@ -71,7 +70,7 @@ public class FileAPIController {
     public Map<String,Object> putImageUpload(
         @PathVariable String type, @RequestPart MultipartFile file) {
         Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
-        //업로드 할 파일 경로 생성 /order
+        //업로드 할 파일 경로 생성 /order/{type}
         Path folderLocation = Paths.get(path+"/"+type);
 
         String fileName = file.getOriginalFilename();

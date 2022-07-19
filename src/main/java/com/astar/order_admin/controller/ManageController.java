@@ -19,7 +19,7 @@ public class ManageController {
     }
     @GetMapping("/order")  //주문 관리
     public String getManageOrder() {
-        return "/member/order";
+        return "/manage/order";
     }
     
 }

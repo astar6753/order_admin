@@ -6,19 +6,21 @@
         WHERE img_mi_seq = #{seq} AND img_type = #{type}
         LIMIT 10 OFFSET #{offset}
     </select>
-
-
-
-
-
-
-    
     <insert id="insertImgInfo">
         INSERT INTO img_info
         (img_mi_seq, img_type, img_front_name, img_back_name)
         VALUES
         (#{img_mi_seq}, #{img_type}, #{img_front_name}, #{img_back_name})
     </insert>
+    <delete id="deleteImgInfo">
+        DELETE FROM img_info
+        WHERE img_seq=#{seq}
+    </delete>
+
+
+
+
+
     <update id="insertImgToRestaurantInfo">
         UPDATE INTO restaurant_info 
         SET ri_img_seq = #{img_seq}
