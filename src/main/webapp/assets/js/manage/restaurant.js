@@ -1,3 +1,5 @@
+let seq;
+let type = "restaurant";
 
 $(function(){
     $("#open_popup").click(function(){  //영업장 추가 버튼
@@ -31,19 +33,30 @@ $(function(){
             console.log(r.message);
 
             for (let i = 0; i < r.list.length; i++) {
+                if(r.list[i].img_file==null)r.list[i].img_file="default.jpg";
                 let tag =   "<tr>"+
-                                "<td id='order"+r.list[i].ri_seq+"'>"+i+"</td>"+
-                                "<td id='cate"+r.list[i].ri_seq+"'>"+r.list[i].cate_name+"</td=>"+
-                                "<td id='name"+r.list[i].ri_seq+"'>"+r.list[i].ri_name+"</td=>"+
-                                "<td id='price"+r.list[i].ri_seq+"'>"+r.list[i].ri_min_price+"</td=>"+
-                                "<td id='fee"+r.list[i].ri_seq+"'>"+r.list[i].ri_delivery_fee+"</td=>"+
-                                "<td id='addr"+r.list[i].ri_seq+"'>"+r.list[i].ri_address+"</td=>"+
-                                "<td><button class='img_btn' data-seq="+r.list[i].ri_seq+"><i class='fas fa-edit'></i><span>이미지 편집</span></button></td>"+
+                                "<td id='order"+r.list[i].ri_seq+"'>"+(i+1)+"</td>"+
+                                "<td id='cate"+r.list[i].ri_seq+"'>"+r.list[i].cate_name+"</td>"+
+                                "<td id='name"+r.list[i].ri_seq+"'>"+r.list[i].ri_name+"</td>"+
+                                "<td id='price"+r.list[i].ri_seq+"'>"+r.list[i].ri_min_price+"</td>"+
+                                "<td id='fee"+r.list[i].ri_seq+"'>"+r.list[i].ri_delivery_fee+"</td>"+
+                                "<td id='addr"+r.list[i].ri_seq+"'>"+r.list[i].ri_address+"</td>"+
+                                "<td><img class='restaurant_small_img' src='/api/img/"+type+"/"+r.list[i].img_file+"'></td>"+
+                                "<td><button class='img_btn' data-seq="+r.list[i].ri_seq+" name="+r.list[i].ri_name+"><i class='fas fa-edit'></i><span>이미지 편집</span></button></td>"+
                                 "<td><button class='edit_btn' data-seq="+r.list[i].ri_seq+" cate-seq="+r.list[i].ri_cate_seq+"><i class='fas fa-edit'></i><span>수정</span></button></td>"+
                                 "<td><button class='del_btn' data-seq="+r.list[i].ri_seq+"><i class='fas fa-trash-alt'></i><span>삭제</span></button></td>"+
                             "</tr>";
                 $("#restaurant_list").append(tag);
             }
+            $(".img_btn").click(function(){
+                $(".img_popup_area").show();
+                seq = $(this).attr("data-seq");
+                $(".name").html($(this).attr("name"));
+
+                console.log();
+
+            })
+
             $(".del_btn").click(function(){
                 let seq = $(this).attr("data-seq");
                 if(!confirm("영업장 정보를 삭제하시겠습니까?\n삭제된 정보는 되돌릴 수 없습니다.")) return;

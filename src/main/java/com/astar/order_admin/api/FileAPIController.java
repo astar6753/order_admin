@@ -18,6 +18,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,8 @@ public class FileAPIController {
     //uri// order/{member/restaurant/dish}/{filename}
     @GetMapping("/img/{type}/{filename}")
     public ResponseEntity<Resource> getImage(
-        @PathVariable String type, @PathVariable String filename, HttpServletRequest request) {
+        @PathVariable String type, @PathVariable @Nullable String filename, HttpServletRequest request) {
+
         Path folderLocation = Paths.get(path+"/"+type);     // folderLocation = /path/{type}
         Path filePath = folderLocation.resolve(filename);   // filePath = path/type/filename = d:/order/member/default.jpg
         Resource r = null;
@@ -55,6 +57,7 @@ public class FileAPIController {
         } catch (Exception e) {
             System.out.println("파일을 찾을 수 없거나 잘못된 파일 경로 입니다.");
         }
+        
 
         return
             ResponseEntity.ok() //결과로 200ok를 설정

@@ -19,7 +19,6 @@
             <div class="restaurant_table">
                 <table>
                     <thead>
-                        <div class="img_area"></div>
                         <tr>
                             <td>번호</td>
                             <td>분류</td>
@@ -27,7 +26,8 @@
                             <td>최소주문가격</td>
                             <td>배달료</td>
                             <td>위치</td>
-                            <td>영업장 이미지</td>
+                            <td>로고</td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>

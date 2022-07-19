@@ -12,18 +12,23 @@
         VALUES
         (#{img_mi_seq}, #{img_type}, #{img_front_name}, #{img_back_name})
     </insert>
-    <delete id="deleteImgInfo">
+    <delete id="deleteImgInfoByImgSeq">
         DELETE FROM img_info
         WHERE img_seq=#{seq}
     </delete>
-
-
-
-
-
-    <update id="insertImgToRestaurantInfo">
-        UPDATE INTO restaurant_info 
+    <update id="updateImgToRestaurantInfo">
+        UPDATE restaurant_info 
         SET ri_img_seq = #{img_seq}
-        WHERE ri_seq = #{ri_seq}
+        WHERE ri_seq = #{seq}
+    </update>
+    <update id="updateImgToDishInfo">
+        UPDATE dish_info 
+        SET di_img_seq = #{img_seq}
+        WHERE di_seq = #{seq}
+    </update>
+    <update id="updateImgToMemberInfo">
+        UPDATE member_Info 
+        SET mi_img_seq = #{img_seq}
+        WHERE mi_seq = #{seq}
     </update>
 </mapper>

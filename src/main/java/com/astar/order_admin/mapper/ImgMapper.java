@@ -10,7 +10,8 @@ import com.astar.order_admin.data.ImgInfoVO;
 public interface ImgMapper {
     public List<ImgInfoVO> selectImgInfoBySeq(Integer type, Integer offset, Integer seq);
     public void insertImgInfo(ImgInfoVO data);
-    public void deleteImgInfo(Integer seq);
-
-    public void insertImgToRestaurantInfo(Integer ri_seq, Integer img_seq);
+    public void deleteImgInfoByImgSeq(Integer seq);
+    public void updateImgToRestaurantInfo(Integer img_seq, Integer seq);
+    public void updateImgToDishInfo(Integer img_seq, Integer seq);
+    public void updateImgToMemberInfo(Integer img_seq, Integer seq);
 }

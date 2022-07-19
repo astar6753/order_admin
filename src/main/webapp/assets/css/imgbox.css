@@ -1,13 +1,13 @@
-.img_popup_area {border: 1px solid black;}
+.img_popup_area {display:none; width: 800px;height: 200px;border: 1px solid black;}
 
 .img_edit {width: 100%; height: 200px;}
-.img_list {width: 800px; overflow: hidden; border-bottom: 1px solid #333;}
+.img_list {width: inherit; overflow: hidden;}
 .restaurant_img {
     width: 100px; height: 150px; background-position: center; background-size: 100%;
     display: inline-block; background-repeat: no-repeat;
     position: relative;
 }
-.aaa111 { display: inline-block;}
+.img_box { display: inline-block;}
 
 .restaurant_img button:nth-child(2) {
     float: right;
@@ -27,3 +27,6 @@
 /* #browse {
     position: relative;
 } */
+
+.name{display: inline-block;}
+.img_popup_title{display: inline-block;}
