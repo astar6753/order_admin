@@ -42,7 +42,8 @@ $(function(){
                                 "<td id='fee"+r.list[i].ri_seq+"'>"+r.list[i].ri_delivery_fee+"</td>"+
                                 "<td id='addr"+r.list[i].ri_seq+"'>"+r.list[i].ri_address+"</td>"+
                                 "<td><img class='restaurant_small_img' src='/api/img/"+type+"/"+r.list[i].img_file+"'></td>"+
-                                "<td><button class='img_btn' data-seq="+r.list[i].ri_seq+" name="+r.list[i].ri_name+"><i class='fas fa-edit'></i><span>이미지 편집</span></button></td>"+
+                                "<td><button class='img_btn' data-seq="+r.list[i].ri_seq+" name="+r.list[i].ri_name+"><i class='fas fa-edit'></i><span>로고 이미지</span></button></td>"+
+                                "<td><button class='dish_btn'><i class='fas fa-edit'></i><a href='/manage/dish?seq='"+r.list[i].ri_seq+">메뉴관리</a></button></td>"+
                                 "<td><button class='edit_btn' data-seq="+r.list[i].ri_seq+" cate-seq="+r.list[i].ri_cate_seq+"><i class='fas fa-edit'></i><span>수정</span></button></td>"+
                                 "<td><button class='del_btn' data-seq="+r.list[i].ri_seq+"><i class='fas fa-trash-alt'></i><span>삭제</span></button></td>"+
                             "</tr>";
@@ -52,9 +53,6 @@ $(function(){
                 $(".img_popup_area").show();
                 seq = $(this).attr("data-seq");
                 $(".name").html($(this).attr("name"));
-
-                console.log();
-
             })
 
             $(".del_btn").click(function(){
@@ -93,7 +91,6 @@ $(function(){
                         ri_delivery_fee: $("#ri_delivery_fee").val(),
                         ri_address: $("#ri_address").val()
                     };
-                    console.log(data)
                     $.ajax({
                         url:"/api/restaurant/update",
                         type:"patch",

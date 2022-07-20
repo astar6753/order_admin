@@ -49,7 +49,7 @@ public class RestaurantAPIController {
             return new ResponseEntity<Map<String,Object>>(
                 member_service.isValidOwner(user,data),HttpStatus.BAD_REQUEST
             );
-        }        
+        }
         try {
             rest_mapper.insertRestaurantInfo(data);
         } catch (DuplicateKeyException e) {   

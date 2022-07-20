@@ -1,7 +1,7 @@
 body {
     margin: 0;
 }
-a {
+.nav a {
     text-decoration: none;
     color: white;
 
@@ -13,19 +13,19 @@ a {
     background-color: rgb(51, 89, 186);
     padding: 8px 12px;
 }
-.logo {
+.nav .logo {
     font-size: 24px;
     color: white;
 }
-.menu {
+.nav .menu {
     display: flex;
     list-style: none;
     padding-left: 0;
 
 }
-.menu li {
+.nav .menu li {
     padding:  8px 12px;
 }
-.sep {
+.nav .menu .sep {
     color: white;
 }
