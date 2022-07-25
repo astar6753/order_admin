@@ -1,0 +1,101 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.astar.order_admin.mapper.OrderMapper">
+    <select id="selectOrderRespoenseListByUserSeq" resultType="com.astar.order_admin.data.response.order.OrderResponseVO">
+        SELECT  a.oi_seq, a.oi_status, a.oi_address, a.oi_reg_dt,
+                b.mi_id, b.mi_name, b.mi_phone,
+                c.ri_name, c.ri_address 
+        FROM
+            (
+                SELECT * FROM order_info
+                <if test="start_dt != null and end_dt != null">
+                    WHERE DATE(oi_reg_dt) BETWEEN #{start_dt} and #{end_dt}
+                </if>
+            )a
+        LEFT JOIN member_info b
+            ON a.oi_mi_seq = b.mi_seq
+        LEFT JOIN (
+                SELECT * FROM restaurant_info
+                <if test="keyword != null">     
+                WHERE ri_name LIKE CONCAT('%',#{keyword},'%')
+                </if>
+            )c
+            ON a.oi_ri_seq = c.ri_seq
+        WHERE ri_mi_seq = #{user_seq}
+        ORDER BY a.oi_reg_dt DESC
+        LIMIT 20 OFFSET #{offset}
+    </select>
+    <select id="selectOrderRespoenseTotalCntByUserSeq" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM
+            (
+                SELECT * FROM order_info
+                <if test="start_dt != null and end_dt != null">
+                    WHERE DATE(oi_reg_dt) BETWEEN #{start_dt} and #{end_dt}
+                </if>
+            )a
+        LEFT JOIN member_info b
+            ON a.oi_mi_seq = b.mi_seq
+        LEFT JOIN (
+                SELECT * FROM restaurant_info
+                <if test="keyword != null">     
+                WHERE ri_name LIKE CONCAT('%',#{keyword},'%')
+                </if>
+            )c
+            ON a.oi_ri_seq = c.ri_seq
+        WHERE ri_mi_seq = #{user_seq}
+    </select>
+    <select id="selectOrderRespoenseTotalPageByUserSeq" resultType="java.lang.Integer">
+        SELECT CEIL(COUNT(*)/20)
+        FROM
+            (
+                SELECT * FROM order_info
+                <if test="start_dt != null and end_dt != null">
+                    WHERE DATE(oi_reg_dt) BETWEEN #{start_dt} and #{end_dt}
+                </if>
+            )a
+        LEFT JOIN member_info b
+            ON a.oi_mi_seq = b.mi_seq
+        LEFT JOIN (
+                SELECT * FROM restaurant_info
+                <if test="keyword != null">     
+                WHERE ri_name LIKE CONCAT('%',#{keyword},'%')
+                </if>
+            )c
+            ON a.oi_ri_seq = c.ri_seq
+        WHERE ri_mi_seq = #{user_seq}
+    </select>
+
+
+    <select id="selectOrderDetailResponseByOrderSeq" resultType="com.astar.order_admin.data.response.order_detail.OrderDetailResponseVO">
+        select a.oi_seq, oi_status, a.oi_address, a.oi_reg_dt,
+                b.mi_id, b.mi_name, b.mi_phone,
+                c.ri_name, c.ri_address
+        from (
+            select * from order_info where oi_seq = #{order_seq}
+        )a
+        left join member_info b      
+                on a.oi_mi_seq = b.mi_seq
+        left join restaurant_info c      
+                on a.oi_ri_seq = c.ri_seq
+    </select>
+    <select id="selectEachOrderByOrderSeq" resultType="com.astar.order_admin.data.response.order_detail.EachOrderVO">
+        select a.each_seq, b.di_name, b.di_price, a.each_quantity
+        from (
+            select * from order_each_info
+            where each_oi_seq = #{order_seq}
+        )a
+        left join dish_info b
+        on a.each_di_seq = b.di_seq
+    </select>
+    <select id="selectOptionDetailByEachSeq" resultType="com.astar.order_admin.data.response.order_detail.OptionDetailVO">
+        select b.desc_name, b.desc_price
+        from (
+                select * from order_selected_option_info
+                where sel_each_seq = #{each_seq}
+            )a
+        left join option_description_info b
+        on a.sel_desc_seq = b.desc_seq
+    </select>
+
+</mapper>

@@ -1,9 +1,9 @@
-package com.astar.order_admin.data.response;
+package com.astar.order_admin.data.request;
 
 import lombok.Data;
 
 @Data
-public class DescVO {
+public class DescRequestVO {
     private Integer desc_seq;
     private String desc_name;
     private Integer desc_price;

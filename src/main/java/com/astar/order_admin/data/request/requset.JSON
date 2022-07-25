@@ -1,0 +1,62 @@
+{
+    "di_ri_seq": 2,
+    "di_name": "음식1",
+    "di_price": 10000,
+    "di_img_seq": null,
+    "di_description": "이 메뉴는 맛있다",
+    "blockList": [
+        {
+            "opt_title": "옵션블록1-1",
+            "opt_allowed_no": 1,
+            "opt_requierd": 1,
+            "descList": [
+                {
+                    "desc_name": "필수옵션1-1-1",
+                    "desc_price": 1000
+                },
+                {
+                    "desc_name": "필수옵션1-1-2",
+                    "desc_price": 1000
+                }
+            ]
+        },
+        {
+            "opt_title": "옵션블록1-2",
+            "opt_allowed_no": 1,
+            "opt_requierd": 0,
+            "descList": [
+                {
+                "desc_name": "선택옵션1-2-1",
+                "desc_price": 1000
+                },
+                {
+                "desc_name": "선택옵션1-2-2",
+                "desc_price": 1000
+                },
+                {
+                "desc_name": "선택옵션1-2-3",
+                "desc_price": 1000
+                }
+            ]
+        },
+        {
+            "opt_title": "옵션블록1-3",
+            "opt_allowed_no": 3,
+            "opt_requierd": 0,
+            "descList": [
+                {
+                    "desc_name": "선택옵션1-3-1",
+                    "desc_price": 1000
+                },
+                {
+                    "desc_name": "선택옵션1-3-2",
+                    "desc_price": 1000
+                },
+                {
+                    "desc_name": "선택옵션1-3-3",
+                    "desc_price": 1000
+                }
+            ]
+        }
+    ]
+}

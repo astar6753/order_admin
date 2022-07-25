@@ -1,20 +1,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.astar.order_admin.mapper.DishMapper">
-    <insert id="insertDishInfo">
+    
+    <select id="selectRestaurantView" resultType="com.astar.order_admin.data.RestaurantViewVO">
+        select * from restaurant_view where ri_seq = #{ri_seq} 
+        order by ri_seq asc
+    </select>
+    <select id="selectDishInfoByRestaurant" resultType="com.astar.order_admin.data.response.DishVO">
+        select * from dish_view where di_ri_seq = #{ri_seq}
+        order by di_seq asc
+    </select>
+    <select id="selectOptionBlockInfoByDish" resultType="com.astar.order_admin.data.response.BlockVO">
+        select * from option_block_info where opt_di_seq = #{di_seq}
+        order by opt_seq asc
+    </select>
+    <select id="selectOptionDescInfoByBlock" resultType="com.astar.order_admin.data.response.DescVO">
+        select * from option_description_info where desc_opt_seq = #{opt_seq}
+        order by desc_seq asc
+    </select>
+
+
+    <insert id="insertDishInfoByRestaurant"
+        parameterType="com.astar.order_admin.data.request.DishRequestVO"
+        useGeneratedKeys="true" keyProperty="di_seq">
         INSERT INTO dish_info
-        (di_ri_seq,di_name,di_price,di_img_seq,di_description)
+        (di_ri_seq, di_name, di_price, di_img_seq, di_description)
         VALUES
-        (#{di_ri_seq},#{di_name},#{di_price},#{di_img_seq},#{di_description})
+        (#{di_ri_seq}, #{di_name}, #{di_price}, #{di_img_seq}, #{di_description})
+    </insert>
+    <insert id="insertOptionBlockInfoByDish"
+        parameterType="com.astar.order_admin.data.request.BlockRequestVO"
+        useGeneratedKeys="true" keyProperty="opt_seq">
+        INSERT INTO option_block_info
+        (opt_title, opt_di_seq, opt_allowed_no, opt_requierd)
+        VALUES
+        (#{opt_title}, #{opt_di_seq}, #{opt_allowed_no}, #{opt_requierd})
+    </insert>
+    <insert id="insertOptionDescByBlock">
+        INSERT INTO option_description_info
+        (desc_name, desc_price, desc_opt_seq)
+        VALUES
+        (#{desc_name}, #{desc_price}, #{desc_opt_seq})
     </insert>
 
-    <select id="selectDishInfoByRestaurant" resultType="com.astar.order_admin.data.DishInfoVO">
-        select * from dish_info where di_ri_seq = #{ri_seq} 
-    </select>
-    <select id="selectOptionBlockInfoByDish" resultType="com.astar.order_admin.data.OptionBlockInfoVO">
-        select * from option_block_info where opt_di_seq =  #{di_seq};
-    </select>
-    <select id="selectOptionDescInfoByBlock" resultType="com.astar.order_admin.data.OptionDesctiptionInfoVO">
-        select * from option_desctiption_info where desc_opt_seq = #{opt_seq};
-    </select>
+
 </mapper>

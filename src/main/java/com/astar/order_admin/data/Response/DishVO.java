@@ -1,4 +1,4 @@
-package com.astar.order_admin.data.Response;
+package com.astar.order_admin.data.response;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ public class DishVO {
     private String di_name;
     private Integer di_price;
     private Integer di_img_seq;
+    private String dish_img_file;
     private String di_description;
     private List<BlockVO> blockList;
 }

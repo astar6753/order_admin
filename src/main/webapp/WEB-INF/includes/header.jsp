@@ -30,24 +30,30 @@
             <a href="/">OrderAdmin</a>
         </div>
 
-        <div class="menu">
-            <a class="customer_list" href="/manage/customer">고객 이력 조회</a>
-            <p class="sep">|</p>
-            <a class="restaurant_list" href="/manage/restaurant">영업장 관리</a>
-            <p class="sep">|</p>
-            <a class="order_list" href="/manage/order">주문 관리</a>
-        </div>
+        <ul class="menu">
+            <li class="hover"><a class="customer_list" href="/manage/customer">고객 이력 조회</a></li>
+            <li><p class="sep">|</p></li>
+            <li class="hover"><a class="restaurant_list" href="/manage/restaurant">영업장 관리</a></li>
+            <li><p class="sep">|</p></li>
+            <li class="hover"><a class="order_list" href="/manage/order">주문 관리</a></li>
+        </ul>
 
-        <div class="user_info">
+        <ul class="user_info">
             <c:if test="${user!=null}">
-                <a class="user_info" href="/member/info">${user.mi_name}(${user.mi_id})</a>
-                <a href="/member/logout">로그아웃</a>
+                <li class="hover"><a class="user" href="/member/info">${user.mi_name}(${user.mi_id})</a></li>
+                <li><p class="sep">|</p></li>
+                <li class="hover"><a href="/member/logout">로그아웃</a></li>
             </c:if>
             <c:if test="${user==null}">
-                <a href="/member/join">회원가입</a>
-                <a href="/member/login">로그인</a>
+                <li class="hover"><a href="/member/join">회원가입</a></li>
+                <li><p class="sep">|</p></li>
+                <li class="hover"><a href="/member/login">로그인</a></li>
             </c:if>
-        </div>
+        </ul>
+        
+        <a href="#" class="nav_toggle_btn">
+            <i class="fas fa-bars"></i>
+        </a>
     </header> 
 </body>
 </html>

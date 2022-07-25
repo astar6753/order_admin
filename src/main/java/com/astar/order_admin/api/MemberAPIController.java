@@ -43,7 +43,7 @@ public class MemberAPIController {
         resultMap.put("status",true);
         resultMap.put("message","회원 정보를 추가했습니다.");
         MemberInfoVO user = member_mapper.selectMemberInfoBySeq(data.getMi_seq());    //반환된 mi_seq값으로 방금 회원가입한 유저정보를 찾아서
-        session.setAttribute("user",user);                                      //세션에 등록
+        session.setAttribute("user",user);                              //세션에 등록
         return new ResponseEntity<Map<String,Object>>(resultMap,HttpStatus.OK);
     }
 

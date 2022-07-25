@@ -1,0 +1,102 @@
+main .dish_area {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+main .dish_area .dish_list_wrap {
+    border: 1px solid #000;
+    margin-bottom: 30px;
+    padding: 7px;
+}
+
+main .dish_area .dish_list_wrap .content_left_box {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+main .dish_area .dish_list_wrap .content_left_box .dish_img_area .img_box_link .dish_img {
+    width: 150px;
+    border-radius: 30%; border: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+main .dish_area .dish_list_wrap .content_left_box .dish_title_area h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+main .dish_area .dish_list_wrap .content_right_box {
+    display: inline-block;
+}
+
+.dish_block p {
+    display: inline-block;
+}
+
+.option_block h3, .option_block p {
+    display: inline-block;
+}
+
+
+aside{
+    /* display: none; */
+    position: fixed;
+    left: 0;
+    top: 43px;
+    width: 270px;
+    height: 100%;
+    border-right: 1px solid #000;
+    overflow: scroll;    
+}
+
+aside::-webkit-scrollbar {
+    display: none;
+}
+
+aside .aside_restaurant_img img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.aside_restaurant_area .restaurant_title_area .restaurant_title {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.aside_restaurant_area .restaurant_info h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.aside_restaurant_area .restaurant_info div {
+    margin-bottom: 20px;
+}
+
+.dish_list_area {
+    background-color: #eee;
+    padding: 5px;
+}
+
+.dish_list_area h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.dish_list_area ul {
+    padding: 20px;
+}
+
+.img_box_link {
+    display: block
+}
+.img_box_link .img_btn { 
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: green;
+    z-index: 99;
+}

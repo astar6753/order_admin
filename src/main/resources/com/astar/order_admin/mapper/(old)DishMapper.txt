@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.astar.order_admin.mapper.DishMapper">
+
+    <select id="selectRestaurantInfo" resultType="com.astar.order_admin.data.RestaurantInfoVO">
+        select * from restaurant_info where ri_seq = #{ri_seq} 
+    </select>
+    <select id="selectDishInfoByRestaurant" resultType="com.astar.order_admin.data.DishInfoVO">
+        select distinct b.* from restaurant_info a 
+        left outer join dish_info b on a.ri_seq = b.di_ri_seq
+        where ri_seq = #{ri_seq}
+    </select>
+    <select id="selectOptionBlockInfoByDish" resultType="com.astar.order_admin.data.OptionBlockInfoVO">
+        select distinct opt_seq,opt_title,opt_di_seq,opt_allowed_no,opt_requierd from restaurant_view 
+        where ri_seq = #{ri_seq} and di_seq = (
+            select distinct di_seq from restaurant_view a
+            where ri_seq = #{ri_seq} limit 1 offset #{di_size}
+        )
+    </select>
+    <select id="selectOptionDescInfoByBlock" resultType="com.astar.order_admin.data.OptionDesctiptionInfoVO">
+        select distinct desc_seq,desc_name,desc_price,desc_opt_seq from restaurant_view 
+        where ri_seq =1 and di_seq = (
+            select distinct di_seq from restaurant_view a
+            where ri_seq =1 limit 1 offset #{di_size}
+            ) and opt_seq = (
+            select distinct opt_seq from restaurant_view b
+            where ri_seq =1 and di_seq = (
+                select distinct di_seq from restaurant_view a
+                where ri_seq =1 limit 1 offset #{di_size}
+                ) limit 1 offset #{opt_size}
+            )
+    </select>
+
+    
+    <insert id="insertDishInfo">
+        INSERT INTO dish_info
+        (di_ri_seq,di_name,di_price,di_img_seq,di_description)
+        VALUES
+        (#{di_ri_seq},#{di_name},#{di_price},#{di_img_seq},#{di_description})
+    </insert>
+    
+</mapper>

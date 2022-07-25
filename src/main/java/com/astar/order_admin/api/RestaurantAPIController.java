@@ -77,7 +77,7 @@ public class RestaurantAPIController {
         }
 
         if(page==null)page=1;
-        resultMap.put("list",rest_mapper.selectRestaurantCateImgViewBySeq(user.getMi_seq(), (page-1)/10)); //현재 로그인한 회원의 번호로 영업장 조회
+        resultMap.put("list",rest_mapper.selectRestaurantViewBySeq(user.getMi_seq(), (page-1)/10)); //현재 로그인한 회원의 번호로 영업장 조회
         resultMap.put("message", "현재 로그인한 사업자 회원의 식당정보입니다.");
         return new ResponseEntity<Map<String,Object>>(resultMap,HttpStatus.OK);
     }
